@@ -9,9 +9,12 @@ async function bootstrap() {
   app.start();
 
   const rates = await getRates();
-  console.log(rates);
   const message = formatRatesMessage(rates);
+  
+  console.log(message);
+  
   await sendMessage(message);
+
   console.log('fx-telegram-publisher is running');
 }
 

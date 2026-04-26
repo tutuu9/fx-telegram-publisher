@@ -11,7 +11,10 @@ async function sendMessage(text) {
         });
         console.log('Message sent to Telegram');
     } catch (error) {
-        console.error('Failed to send Telegram message:', error.message);
+        console.error(
+            'Failed to send Telegram message:',
+            error.response?.data || error.message
+        );
     };
 }
 
