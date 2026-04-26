@@ -43,8 +43,8 @@ async function startBot() {
 
                     const rates = await getRates();
                     const formattedMessage = formatRatesMessage(rates);
-                    await sendMessage(formattedMessage);
-
+                    await sendMessage(env.telegram.chatId, formattedMessage);
+                    await sendMessage(userId, '✅ Post successfully published');
                     console.log('Post sent by admin command');
                 }
             }

@@ -16,7 +16,7 @@ function startRatesJob() {
 
             console.log(message);
 
-            await sendMessage(message);
+            await sendMessage(env.telegram.chatId, message);
 
         } catch (error) {
             console.error('Rates job failed:', error.message);

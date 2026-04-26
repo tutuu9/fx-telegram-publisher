@@ -1,12 +1,12 @@
 const axios = require('axios');
 const { env } = require('../config/env');
 
-async function sendMessage(text) {
+async function sendMessage(chatId, text) {
     try {
         const url = `https://api.telegram.org/bot${env.telegram.botToken}/sendMessage`;
 
         await axios.post(url, {
-            chat_id: env.telegram.chatId,
+            chat_id: chatId,
             text: text
         });
         console.log('Message sent to Telegram');
