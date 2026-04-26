@@ -5,15 +5,23 @@ const { formatRatesMessage } = require('../utils/formatRatesMessage');
 const { env } = require('../config/env');
 
 function startRatesJob() {
-    cron.schedule(env.cronSchedule, async () => {
-        const rates = await getRates();
-        const message = formatRatesMessage(rates);
-        
-        console.log(message);
-        
-        await sendMessage(message);
+    console.log(`Rates job scheduled with: ${env.cronSchedule}`);
 
-        console.log('Running scheduled rates job...');
-    }); 
+    cron.schedule(env.cronSchedule, async () => {
+        try {
+            console.log('Running scheduled rates job...');
+
+            const rates = await getRates();
+            const message = formatRatesMessage(rates);
+
+            console.log(message);
+
+            await sendMessage(message);
+
+        } catch (error) {
+            console.error('Rates job failed:', error.message);
+        }
+    });
 }
+
 module.exports = { startRatesJob };

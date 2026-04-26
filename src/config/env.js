@@ -16,6 +16,9 @@ const env = {
   telegram: {
     botToken: process.env.TELEGRAM_BOT_TOKEN,
     chatId: process.env.TELEGRAM_CHAT_ID,
+    admins: process.env.TELEGRAM_ADMIN_IDS
+      ? process.env.TELEGRAM_ADMIN_IDS.split(',').map(id => id.trim())
+      : [],
   },
   currencyApi: {
     baseUrl: process.env.CURRENCY_API_BASE_URL || 'https://open.er-api.com/v6/latest',
