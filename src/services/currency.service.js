@@ -8,20 +8,24 @@ async function getRates() {
     for (const pair of env.currencyPairs) {
       const [base, target] = pair.split('/');
 
-      const response = await axios.get(`${env.currencyApi.baseUrl}/convert`, {
-        params: {
-          from: base,
-          to: target,
-          amount: 1,
-          access_key: env.currencyApi.accessKey,
-        },
-      });
+      const response = await axios.get(`${env.currencyApi.baseUrl}/${base}`);
+
+      if (response.data.result !== 'success') {
+        throw new Error(`Currency API failed for base currency: ${base}`);
+      }
+
+      const rate = response.data.rates[target];
+
+      if (!rate) {
+        throw new Error(`Rate not found for pair: ${pair}`);
+      }
 
       rates.push({
         pair,
         base,
         target,
-        rate: response.data.result,
+        rate,
+        updatedAt: response.data.time_last_update_utc,
       });
     }
 

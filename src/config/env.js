@@ -18,7 +18,7 @@ const env = {
     chatId: process.env.TELEGRAM_CHAT_ID,
   },
   currencyApi: {
-    baseUrl: process.env.CURRENCY_API_BASE_URL || 'https://api.exchangerate.host',
+    baseUrl: process.env.CURRENCY_API_BASE_URL || 'https://open.er-api.com/v6/latest',
   },
   currencyPairs: process.env.CURRENCY_PAIRS
     ? process.env.CURRENCY_PAIRS.split(',').map((pair) => pair.trim())
